@@ -1,0 +1,28 @@
+server:
+  port: 8852
+spring:
+  # 多网卡过滤
+  cloud:
+    inetutils:
+      ignored-interfaces:
+        - lo
+      preferred-networks:
+        - 192.168.2
+  datasource:
+    url: jdbc:mysql://192.168.2.200:30306/cluster_user?serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&tinyInt1isBit=false
+    username: root
+    password: 123456
+# swagger 接口文档
+swagger:
+  # 开启访问
+  enable: true
+# 服务注册
+cloud:
+  nacos:
+    server: 192.168.2.200:${cloud.nacos.port}
+    port: 30100
+    username: nacos
+    password: nacos
+  sentinel:
+    server: 192.168.2.200:${cloud.sentinel.port}
+    port: 8080

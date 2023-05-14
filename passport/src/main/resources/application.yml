@@ -1,0 +1,21 @@
+server:
+  servlet:
+    context-path: /${spring.application.name}
+spring:
+  application:
+    name: passport
+  profiles:
+    include:
+      - discovery
+    active: @profiles.active@
+  cloud:
+    openfeign:
+      oauth2:
+        enabled: true
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org:
+      springframework:
+        cloud:
+          openfeign: debug

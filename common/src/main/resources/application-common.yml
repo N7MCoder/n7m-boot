@@ -1,0 +1,33 @@
+server:
+  servlet:
+    context-path: /${spring.application.name}
+spring:
+  cloud:
+    inetutils:
+      ignored-interfaces:
+        - lo
+      preferred-networks:
+        - 192.168.2
+  application:
+    name: user
+  profiles:
+    include:
+      - discovery
+    active: @profiles.active@
+# MyBatis 扫描实体包
+entity:
+  packages: cc.nunumao.*.model
+# swagger 接口文档
+swagger:
+  # 认证地址
+  auth: http://localhost:${server.port}
+
+cloud:
+  nacos:
+    server: 192.168.2.200:${cloud.nacos.port}
+    port: 30100
+    username: nacos
+    password: nacos
+  sentinel:
+    server: 192.168.2.200:${cloud.sentinel.port}
+    port: 8080

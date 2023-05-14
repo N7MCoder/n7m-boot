@@ -1,0 +1,52 @@
+server:
+  servlet:
+    context-path: /${spring.application.name}
+spring:
+  application:
+    name: user
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8851/passport/oauth2/jwks
+  profiles:
+    include:
+      - discovery
+    active: @profiles.active@
+  cloud:
+    openfeign:
+      client:
+        config:
+          user:
+            logger-level: full
+# MyBatis 扫描实体包
+entity:
+  packages: cc.nunumao.*.model
+# OAuth2.0 配置
+oauth2:
+  # 应用ID
+  client: 37z9c8hiCmKX5wpF
+  # 应用秘钥
+  secret: 9Qf0hd6XpGZ85tm1WkqcC7FMUElnNgib
+  # jks秘钥
+  salt: dQjq34Gg9Kav7OWL
+  # 令牌有效期
+  expire-access: 3600
+  # 刷新令牌有效期
+  expire-refresh: 86400
+  # 域
+  scope: system
+# swagger 接口文档
+swagger:
+  # 认证地址
+  auth: http://localhost:${server.port}
+  # 应用ID
+  client: ${oauth2.client}
+  # 应用秘钥
+  secret: ${oauth2.secret}
+  # 标题
+  title: 'Swagger Api Docs'
+  # 网站
+  site: 'https://www.nunumao.cc'
+  # email
+  email: '292018748@qq.com'

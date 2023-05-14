@@ -1,0 +1,12 @@
+server:
+  port: 8851
+# 服务注册
+cloud:
+  nacos:
+    server: 192.168.2.200:${cloud.nacos.port}
+    port: 30100
+    username: nacos
+    password: nacos
+  sentinel:
+    server: 192.168.2.200:${cloud.sentinel.port}
+    port: 8080
